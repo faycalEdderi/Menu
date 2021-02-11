@@ -5,6 +5,7 @@ from menu import views
 
 router = routers.DefaultRouter()
 router.register(r'menus', views.MenuViews, 'menu' )
+router.register(r'days', views.WeekViews, 'days')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -2,8 +2,15 @@ from django.db import models
 
 class Menu(models.Model):
 
-    name = models.CharField(max_length=120)
-    description = models.TextField()
+    name = models.CharField(
+        max_length=120,
+        blank = True,
+        null = True
+        )
+    description = models.TextField(
+        blank = True, 
+        null= True
+    )
 
     day_of_menu = models.ForeignKey(
         'Week',
@@ -13,23 +20,27 @@ class Menu(models.Model):
     
 
     def __str__(self):
-        return self.name
+        if self.name:
+            return str(self.day_of_menu) + " : " + self.name
+        else:
+            return str(self.day_of_menu) + " : vide"
 
 class Week(models.Model):
 
     DAYS_OF_WEEK= [
-        ('Lun', 'Lundi'),
-        ('Mar', 'Mardi'),
-        ('Mer', 'Mercredi'),
-        ('Jeu', 'Jeudi'),
-        ('Ven', 'Vendredi'),
-        ('Sam', 'Samedi'),
-        ('Dim', 'Dimanche'),
+        ('Lundi', 'Lundi'),
+        ('Mardi', 'Mardi'),
+        ('Mercredi', 'Mercredi'),
+        ('Jeudi', 'Jeudi'),
+        ('Vendredi', 'Vendredi'),
+        ('Samedi', 'Samedi'),
+        ('Dimanche', 'Dimanche'),
     ]
+    
 
     day = models.CharField(
         choices = DAYS_OF_WEEK,
-        max_length = 3
+        max_length = 10
     )
 
 
